@@ -11,44 +11,46 @@ jQuery(document).ready(function(){
 	jQuery("#scroll-up").hide() ;
 	jQuery(function () {
 		jQuery(window).scroll(function () {
-			var adsTop, adsMaxTop;
-			if(jQuery('#secondary').length){
-				var lastAside = jQuery('#secondary aside').last();
-				if (lastAside.length && jQuery(window).scrollTop() >= lastAside.offset().top + lastAside.outerHeight()) {
-					adsMaxTop = jQuery(document).height() - lastAside.offset().top - lastAside.outerHeight()
-						- jQuery('#large-ads').height() - jQuery('#colophon').height();
+			//right scroll
+			var lastAside = jQuery('#secondary aside').last();
+			var minRightS = lastAside.offset().top + lastAside.outerHeight();
+			var maxRightS = jQuery(document).height() - jQuery(window).height() - jQuery('#colophon').height();
 
-					adsTop = jQuery(window).scrollTop()- lastAside.offset().top - lastAside.height();
-					adsTop = adsTop > adsMaxTop?-(jQuery('#colophon').height()+30):0;
-					jQuery('#large-ads').addClass('fix');
-					jQuery('#large-ads').css({'top': adsTop + 'px'});
-				}else{
-					jQuery('#large-ads').removeClass('fix');
-					jQuery('#large-ads').css({'top': '0px'});
-				}
-			}
+			if ( jQuery(window).scrollTop() >= minRightS) {
+			    jQuery('#large-ads').addClass('fix');
+			    jQuery('#large-ads').css({'top': '0px'});
 
-
-
-			if (jQuery(window).scrollTop() >= jQuery('#primary').offset().top) {
-				jQuery('#scroll-up').fadeIn();
-
-				var verticalMaxTop = jQuery(document).height() - jQuery('#primary').offset().top
-					- jQuery('#vertical').height() - jQuery('#colophon').height();
-
-				var verticalTop = jQuery(window).scrollTop()- jQuery('#primary').offset().top;
-				var verticalTop = (verticalTop > verticalMaxTop )?(verticalMaxTop-10):(verticalTop+10);
-
-				jQuery('#vertical').addClass('fix');
-				jQuery('#vertical').css({'top': verticalTop + 'px'});
+			    if(jQuery(window).scrollTop() >= maxRightS){
+				jQuery('#large-ads').css({'top': -(jQuery(window).scrollTop() - maxRightS)+'px'});
+			    }else{
+				jQuery('#large-ads').css({'top': '0px'});
+			    }
 			}else{
-				jQuery('#scroll-up').fadeOut();
-				jQuery('#vertical').removeClass('fix');
-				jQuery('#vertical').css({'top': '0px'});
+			    jQuery('#large-ads').removeClass('fix');
+			    jQuery('#large-ads').css({'top': '0px'});
 			}
 
+		       /* //left scroll
+			var lastIns = jQuery('#vertical ins').last();
+			var beforeLastIns = lastIns.prev();
 
-		});
+			var minLeftS = beforeLastIns.offset().top + beforeLastIns.outerHeight();
+			var maxLeftS = jQuery(document).height() - jQuery(window).height() - jQuery('#colophon').height();
+
+			if ( jQuery(window).scrollTop() >= minLeftS) {
+			    beforeLastIns.addClass('fix');
+			    beforeLastIns.css({'top': '0px'});
+
+			    if(jQuery(window).scrollTop() >= maxLeftS){
+				beforeLastIns.css({'top': -(jQuery(window).scrollTop() - maxLeftS)+'px'});
+			    }else{
+				beforeLastIns.css({'top': '0px'});
+			    }
+			}else{
+			    beforeLastIns.removeClass('fix');
+			    beforeLastIns.css({'top': '0px'});
+			}*/
+		    });
 		jQuery('a#scroll-up').click(function () {
 			jQuery('body,html').animate({
 				scrollTop: 0
