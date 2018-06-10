@@ -11,7 +11,6 @@ jQuery(document).ready(function(){
 	jQuery("#scroll-up").hide() ;
 	jQuery(function () {
 		jQuery(window).scroll(function () {
-			return;
 			var adsTop, adsMaxTop;
 			if(jQuery('#secondary').length){
 				var lastAside = jQuery('#secondary aside').last();
