@@ -19,7 +19,7 @@ jQuery(document).ready(function(){
 						- jQuery('#large-ads').height() - jQuery('#colophon').height();
 
 					adsTop = jQuery(window).scrollTop()- lastAside.offset().top - lastAside.height();
-					adsTop = adsTop > adsMaxTop?(adsMaxTop-35):0;
+					adsTop = adsTop > adsMaxTop?-(jQuery('#colophon').height()+30):0;
 					jQuery('#large-ads').addClass('fix');
 					jQuery('#large-ads').css({'top': adsTop + 'px'});
 				}else{
